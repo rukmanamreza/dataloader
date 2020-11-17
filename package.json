@@ -1,7 +1,7 @@
 {
-  "name": "dataloader",
+  "name": "@rukmanamreza/dataloader",
   "version": "2.0.0",
-  "description": "A data loading utility to reduce requests to a backend via batching and caching.",
+  "description": "Dataloader fork.",
   "contributors": [
     "Lee Byron <lee@leebyron.com> (http://leebyron.com/)",
     "Daniel Schafer <dschafer@fb.com>",
@@ -14,22 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/graphql/dataloader.git"
+    "url": "git+ssh://git@github.com/graphql/dataloader.git"
   },
   "main": "index.js",
   "typings": "index.d.ts",
-  "scripts": {
-    "test": "npm run lint && npm run check && npm run testonly",
-    "test:ci": "npm run lint && npm run check && npm run testonly:coveralls",
-    "lint": "eslint src",
-    "check": "flow check --max-warnings 0",
-    "build": "babel src --ignore src/__tests__ --out-dir dist/ ; cp src/index.js dist/index.js.flow ; cp src/index.d.ts dist/",
-    "watch": "babel resources/watch.js | node",
-    "testonly": "jest src",
-    "testonly:coveralls": "jest src --coverage && cat ./coverage/lcov.info | coveralls",
-    "preversion": ". ./resources/checkgit.sh && npm test",
-    "prepublish": ". ./resources/prepublish.sh"
-  },
   "files": [
     "index.js",
     "index.js.flow",
@@ -38,17 +26,8 @@
     "LICENSE",
     "PATENTS"
   ],
-  "devDependencies": {
-    "@babel/cli": "7.7.0",
-    "@babel/core": "7.7.2",
-    "@babel/node": "7.7.0",
-    "@babel/preset-env": "7.7.1",
-    "@babel/preset-flow": "7.0.0",
-    "babel-eslint": "10.0.3",
-    "coveralls": "3.0.7",
-    "eslint": "6.6.0",
-    "flow-bin": "0.112.0",
-    "jest": "24.9.0",
-    "sane": "4.1.0"
-  }
+  "directories": {
+    "example": "examples"
+  },
+  "author": ""
 }

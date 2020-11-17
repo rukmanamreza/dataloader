@@ -322,23 +322,25 @@ function dispatchBatch<K, V>(
         `not return a Promise of an Array: ${String(values)}.`
       );
     }
-    if (values.length !== batch.keys.length) {
-      throw new TypeError(
-        'DataLoader must be constructed with a function which accepts ' +
-        'Array<key> and returns Promise<Array<value>>, but the function did ' +
-        'not return a Promise of an Array of the same length as the Array ' +
-        'of keys.' +
-        `\n\nKeys:\n${String(batch.keys)}` +
-        `\n\nValues:\n${String(values)}`
-      );
-    }
+    // if (values.length !== batch.keys.length) {
+    //   throw new TypeError(
+    //     'DataLoader must be constructed with a function which accepts ' +
+    //     'Array<key> and returns Promise<Array<value>>, but the function did ' +
+    //     'not return a Promise of an Array of the same length as the Array ' +
+    //     'of keys.' +
+    //     `\n\nKeys:\n${String(batch.keys)}` +
+    //     `\n\nValues:\n${String(values)}`
+    //   );
+    // }
 
     // Resolve all cache hits in the same micro-task as freshly loaded values.
     resolveCacheHits(batch);
 
     // Step through values, resolving or rejecting each Promise in the batch.
     for (var i = 0; i < batch.callbacks.length; i++) {
-      var value = values[i];
+      var value = values.length && values.find(v => {
+        return v && v.id == batch.keys[i];
+      }) || null;
       if (value instanceof Error) {
         batch.callbacks[i].reject(value);
       } else {
